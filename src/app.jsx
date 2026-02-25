@@ -104,8 +104,6 @@ function App() {
   const [form, setForm] = useState(null);
   const [editId, setEditId] = useState(null);
   const [loaded, setLoaded] = useState(false);
-  const [syncMode, setSyncMode] = useState("local");
-  const [syncMessage, setSyncMessage] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -122,15 +120,7 @@ function App() {
         const remote = await getRemotePlannerData();
         if (remote?.ideas) setIdeas(remote.ideas);
         if (remote?.wins) setWins(remote.wins);
-        if (remote) {
-          setSyncMode("sheets");
-          setSyncMessage("Synced with Google Sheets");
-        }
-      } catch {
-        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
-          setSyncMessage("Google Sheets unavailable, using local storage");
-        }
-      }
+      } catch {}
 
       setLoaded(true);
     })();
@@ -141,18 +131,8 @@ function App() {
     const payload = { ideas, wins };
     storage.set(LOCAL_KEY, JSON.stringify(payload)).catch(() => {});
     saveRemotePlannerData(payload)
-      .then(() => {
-        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
-          setSyncMode("sheets");
-          setSyncMessage("Saved to Google Sheets");
-        }
-      })
-      .catch(() => {
-        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
-          setSyncMode("local");
-          setSyncMessage("Saved locally (Google Sheets save failed)");
-        }
-      });
+      .then(() => {})
+      .catch(() => {});
   }, [ideas, wins, loaded]);
 
   function toggleExpand(id) {
@@ -228,10 +208,6 @@ function App() {
       </div>
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "28px 20px" }}>
-        <div style={{ marginBottom: 12, fontSize: 11, color: syncMode === "sheets" ? "#4a7c59" : "#9a8f80" }}>
-          Storage: {syncMode === "sheets" ? "Google Sheets + local backup" : "Local browser storage"}
-          {syncMessage ? ` - ${syncMessage}` : ""}
-        </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
           <div style={{ fontSize: 13, color: "#aaa" }}>
             {tab === "ideas"

@@ -4,16 +4,6 @@ const GOLD = "#886c44";
 const GOLD_LIGHT = "#f5efe6";
 const GOLD_MID = "#c9a96e";
 
-const CATEGORIES = [
-  "Grant Opportunity",
-  "Program / Event",
-  "Operations",
-  "Marketing",
-  "Restoration",
-  "Volunteer & Staff",
-  "Fundraising",
-  "Other",
-];
 const STATUSES = ["Exploring", "Active", "On Hold", "Not a Fit", "Complete"];
 
 const STATUS_COLORS = {
@@ -26,7 +16,6 @@ const STATUS_COLORS = {
 
 const EMPTY_IDEA = {
   title: "",
-  category: CATEGORIES[0],
   status: STATUSES[0],
   notes: "",
   blockers: "",
@@ -203,7 +192,7 @@ function App() {
   const items = tab === "ideas" ? ideas : wins;
 
   return (
-    <div style={{ fontFamily: "'Cardo', serif", background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
+    <div style={{ fontFamily: "'Cardo', serif", fontSize: 18, background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
       <div style={{ background: GOLD, padding: "16px 28px" }}>
         <div style={{ color: "#fff", fontSize: 10, letterSpacing: 3, textTransform: "uppercase", opacity: 0.8 }}>North Star House</div>
         <div style={{ color: "#fff", fontSize: 19, letterSpacing: 0.5 }}>Organizational Focus Planner</div>
@@ -289,7 +278,6 @@ function App() {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 14, color: "#2d2a26", marginBottom: 6 }}>{item.title}</div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: item.notes ? 8 : 0 }}>
-                      {item.category && <Tag color={GOLD} bg={GOLD_LIGHT}>{item.category}</Tag>}
                       {item.status && <Tag color={sc.color} bg={sc.bg}>{item.status}</Tag>}
                       {item.when && <Tag color="#888" bg="#f5f5f5">{item.when}</Tag>}
                     </div>
@@ -364,18 +352,11 @@ function App() {
                 <Field label="Title" placeholder="e.g. Apply for CAC grant, Launch youth program, New website">
                   <input value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))} placeholder="e.g. Apply for CAC grant, Launch youth program" style={inp} />
                 </Field>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                  <Field label="Category">
-                    <select value={form.category} onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))} style={inp}>
-                      {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Status">
-                    <select value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))} style={inp}>
-                      {STATUSES.map((s) => <option key={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                </div>
+                <Field label="Status">
+                  <select value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))} style={inp}>
+                    {STATUSES.map((s) => <option key={s}>{s}</option>)}
+                  </select>
+                </Field>
                 <Field label="Notes - why it matters, context, ideas">
                   <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} rows={3} placeholder="Background, rationale, opportunity..." style={{ ...inp, resize: "vertical" }} />
                 </Field>

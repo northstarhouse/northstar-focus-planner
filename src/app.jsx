@@ -259,7 +259,7 @@ function App() {
                     </div>
                     {item.notes && <div style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>{item.notes}</div>}
                     {!isIdea && item.impact && (
-                      <div style={{ border: "1px solid #d9ccba", borderRadius: 6, padding: "8px 10px", marginTop: 8, background: "#fffaf4" }}>
+                      <div style={{ border: "1px solid #d9ccba", borderRadius: 6, padding: "8px 10px", marginTop: 8, background: "transparent" }}>
                         <div style={{ fontSize: 10, color: "#b79e7b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Impact</div>
                         <div style={{ fontSize: 12, color: "#666", lineHeight: 1.6 }}>{item.impact}</div>
                       </div>
@@ -295,7 +295,7 @@ function App() {
                 </div>
 
                 {isIdea && open && (
-                  <div style={{ borderTop: "1px solid #f0e8de", padding: "14px 18px", background: "#fdfaf7", display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ borderTop: "1px solid #f0e8de", padding: "14px 18px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
                     {item.blockers && (
                       <div>
                         <div style={{ fontSize: 10, color: "#b05a2f", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Blockers</div>
@@ -303,7 +303,7 @@ function App() {
                       </div>
                     )}
                     {item.gaps && (
-                      <div style={{ border: "2px solid #b42318", borderRadius: 0, padding: "8px 10px", background: "#fff" }}>
+                      <div style={{ border: "2px solid #b42318", borderRadius: 0, padding: "8px 10px", background: "transparent" }}>
                         <div style={{ fontSize: 10, color: "#b42318", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Gaps</div>
                         <div style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>{item.gaps}</div>
                       </div>

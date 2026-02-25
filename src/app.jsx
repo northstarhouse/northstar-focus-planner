@@ -33,6 +33,10 @@ const EMPTY_IDEA = {
   gaps: "",
 };
 const EMPTY_WIN = { title: "", when: "", impact: "", grantUse: "" };
+const LOCAL_KEY = "nsh-planner-v2";
+const SHEETS_URL =
+  window.PLANNER_SHEETS_URL ||
+  "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const storage = {
   async get(key) {
@@ -45,6 +49,63 @@ const storage = {
   },
 };
 
+function jsonp(url, timeoutMs = 12000) {
+  return new Promise((resolve, reject) => {
+    const callbackName = `__planner_jsonp_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    const script = document.createElement("script");
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error("Request timed out"));
+    }, timeoutMs);
+
+    function cleanup() {
+      clearTimeout(timeout);
+      try {
+        delete window[callbackName];
+      } catch {
+        window[callbackName] = undefined;
+      }
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[callbackName] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Failed to load script"));
+    };
+
+    const sep = url.includes("?") ? "&" : "?";
+    script.src = `${url}${sep}callback=${callbackName}`;
+    document.head.appendChild(script);
+  });
+}
+
+async function getRemotePlannerData() {
+  if (!SHEETS_URL || SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) return null;
+  const result = await jsonp(`${SHEETS_URL}?action=get&key=${encodeURIComponent(LOCAL_KEY)}`);
+  if (!result || result.ok !== true) throw new Error("Bad remote response");
+  return result.data || null;
+}
+
+async function saveRemotePlannerData(payload) {
+  if (!SHEETS_URL || SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) return;
+  await fetch(SHEETS_URL, {
+    redirect: "follow",
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
+      action: "save",
+      key: LOCAL_KEY,
+      data: payload,
+    }),
+  });
+}
+
 function App() {
   const [tab, setTab] = useState("ideas");
   const [ideas, setIdeas] = useState([]);
@@ -54,24 +115,55 @@ function App() {
   const [form, setForm] = useState(null);
   const [editId, setEditId] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [syncMode, setSyncMode] = useState("local");
+  const [syncMessage, setSyncMessage] = useState("");
 
   useEffect(() => {
     (async () => {
       try {
-        const r = await storage.get("nsh-planner-v2");
+        const r = await storage.get(LOCAL_KEY);
         if (r?.value) {
           const d = JSON.parse(r.value);
           if (d.ideas) setIdeas(d.ideas);
           if (d.wins) setWins(d.wins);
         }
       } catch {}
+
+      try {
+        const remote = await getRemotePlannerData();
+        if (remote?.ideas) setIdeas(remote.ideas);
+        if (remote?.wins) setWins(remote.wins);
+        if (remote) {
+          setSyncMode("sheets");
+          setSyncMessage("Synced with Google Sheets");
+        }
+      } catch {
+        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
+          setSyncMessage("Google Sheets unavailable, using local storage");
+        }
+      }
+
       setLoaded(true);
     })();
   }, []);
 
   useEffect(() => {
     if (!loaded) return;
-    storage.set("nsh-planner-v2", JSON.stringify({ ideas, wins })).catch(() => {});
+    const payload = { ideas, wins };
+    storage.set(LOCAL_KEY, JSON.stringify(payload)).catch(() => {});
+    saveRemotePlannerData(payload)
+      .then(() => {
+        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
+          setSyncMode("sheets");
+          setSyncMessage("Saved to Google Sheets");
+        }
+      })
+      .catch(() => {
+        if (SHEETS_URL && !SHEETS_URL.includes("PASTE_YOUR_APPS_SCRIPT")) {
+          setSyncMode("local");
+          setSyncMessage("Saved locally (Google Sheets save failed)");
+        }
+      });
   }, [ideas, wins, loaded]);
 
   function toggleExpand(id) {
@@ -147,6 +239,10 @@ function App() {
       </div>
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "28px 20px" }}>
+        <div style={{ marginBottom: 12, fontSize: 11, color: syncMode === "sheets" ? "#4a7c59" : "#9a8f80" }}>
+          Storage: {syncMode === "sheets" ? "Google Sheets + local backup" : "Local browser storage"}
+          {syncMessage ? ` - ${syncMessage}` : ""}
+        </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
           <div style={{ fontSize: 13, color: "#aaa" }}>
             {tab === "ideas"
@@ -226,7 +322,7 @@ function App() {
                           fontFamily: "Georgia, serif",
                         }}
                       >
-                        {open ? "? Less" : "? More"}
+                        {open ? "Less" : "More"}
                       </button>
                     )}
                     <Btn onClick={() => startEdit(item)}>Edit</Btn>

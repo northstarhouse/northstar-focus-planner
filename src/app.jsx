@@ -172,7 +172,7 @@ function App() {
   const items = tab === "ideas" ? ideas : wins;
 
   return (
-    <div style={{ fontFamily: "'Cardo', serif", fontSize: 18, background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
+    <div style={{ fontFamily: "'Cardo', serif", fontSize: 18, fontWeight: 700, background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
       <div style={{ background: GOLD, padding: "16px 28px" }}>
         <div style={{ color: "#fff", fontSize: 10, letterSpacing: 3, textTransform: "uppercase", opacity: 0.8 }}>North Star House</div>
         <div style={{ color: "#fff", fontSize: 19, letterSpacing: 0.5 }}>Organizational Focus Planner</div>

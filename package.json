@@ -1,0 +1,1 @@
+{"name":"northstar-focus-planner","version":"1.0.0","private":true,"scripts":{"build":"esbuild src/app.jsx --outfile=assets/app.js --minify --format=iife --jsx-factory=React.createElement --jsx-fragment=React.Fragment --target=es2017"},"devDependencies":{"esbuild":"^0.27.2"}}

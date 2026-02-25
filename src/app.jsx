@@ -209,11 +209,7 @@ function App() {
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "28px 20px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
-          <div style={{ fontSize: 13, color: "#aaa" }}>
-            {tab === "ideas"
-              ? "Grants, programs, projects, and anything you're considering - with space to note what's blocking or missing."
-              : "Things you've done, built, or achieved. Useful for grant writing, board reports, and telling your story."}
-          </div>
+          <div />
           <button
             onClick={openAdd}
             style={{
@@ -237,7 +233,7 @@ function App() {
 
         {items.length === 0 && (
           <div style={{ textAlign: "center", padding: "60px 20px", color: "#ccc", fontSize: 13 }}>
-            Nothing here yet - hit <strong>+ Add</strong> to get started.
+            &nbsp;
           </div>
         )}
 
@@ -325,8 +321,8 @@ function App() {
 
             {tab === "ideas" ? (
               <>
-                <Field label="Title" placeholder="e.g. Apply for CAC grant, Launch youth program, New website">
-                  <input value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))} placeholder="e.g. Apply for CAC grant, Launch youth program" style={inp} />
+                <Field label="Title">
+                  <input value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))} style={inp} />
                 </Field>
                 <Field label="Status">
                   <select value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))} style={inp}>
@@ -334,28 +330,28 @@ function App() {
                   </select>
                 </Field>
                 <Field label="Notes - why it matters, context, ideas">
-                  <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} rows={3} placeholder="Background, rationale, opportunity..." style={{ ...inp, resize: "vertical" }} />
+                  <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} rows={3} style={{ ...inp, resize: "vertical" }} />
                 </Field>
                 <Field label="Blockers - what's in the way">
-                  <textarea value={form.blockers} onChange={(e) => setForm((p) => ({ ...p, blockers: e.target.value }))} rows={2} placeholder="Capacity, funding, decisions needed, timing..." style={{ ...inp, resize: "vertical" }} />
+                  <textarea value={form.blockers} onChange={(e) => setForm((p) => ({ ...p, blockers: e.target.value }))} rows={2} style={{ ...inp, resize: "vertical" }} />
                 </Field>
                 <Field label="Gaps - what's missing">
-                  <textarea value={form.gaps} onChange={(e) => setForm((p) => ({ ...p, gaps: e.target.value }))} rows={2} placeholder="Skills, documentation, relationships, resources..." style={{ ...inp, resize: "vertical" }} />
+                  <textarea value={form.gaps} onChange={(e) => setForm((p) => ({ ...p, gaps: e.target.value }))} rows={2} style={{ ...inp, resize: "vertical" }} />
                 </Field>
               </>
             ) : (
               <>
                 <Field label="What was accomplished">
-                  <input value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))} placeholder="e.g. Completed roof restoration, Launched volunteer portal" style={inp} />
+                  <input value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))} style={inp} />
                 </Field>
                 <Field label="When">
-                  <input value={form.when} onChange={(e) => setForm((p) => ({ ...p, when: e.target.value }))} placeholder="e.g. Fall 2024, January 2025" style={inp} />
+                  <input value={form.when} onChange={(e) => setForm((p) => ({ ...p, when: e.target.value }))} style={inp} />
                 </Field>
                 <Field label="Why it mattered">
-                  <textarea value={form.impact} onChange={(e) => setForm((p) => ({ ...p, impact: e.target.value }))} rows={3} placeholder="Community impact, org capacity, historic preservation..." style={{ ...inp, resize: "vertical" }} />
+                  <textarea value={form.impact} onChange={(e) => setForm((p) => ({ ...p, impact: e.target.value }))} rows={3} style={{ ...inp, resize: "vertical" }} />
                 </Field>
                 <Field label="How to use this in grant writing">
-                  <textarea value={form.grantUse} onChange={(e) => setForm((p) => ({ ...p, grantUse: e.target.value }))} rows={2} placeholder="Proof of capacity, demonstrated need, organizational health..." style={{ ...inp, resize: "vertical" }} />
+                  <textarea value={form.grantUse} onChange={(e) => setForm((p) => ({ ...p, grantUse: e.target.value }))} rows={2} style={{ ...inp, resize: "vertical" }} />
                 </Field>
               </>
             )}

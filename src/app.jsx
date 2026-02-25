@@ -303,8 +303,8 @@ function App() {
                       </div>
                     )}
                     {item.gaps && (
-                      <div style={{ border: "2px solid #b05a2f", borderRadius: 0, padding: "8px 10px", background: "#fff" }}>
-                        <div style={{ fontSize: 10, color: "#b05a2f", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Gaps</div>
+                      <div style={{ border: "2px solid #b42318", borderRadius: 0, padding: "8px 10px", background: "#fff" }}>
+                        <div style={{ fontSize: 10, color: "#b42318", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Gaps</div>
                         <div style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>{item.gaps}</div>
                       </div>
                     )}

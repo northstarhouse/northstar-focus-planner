@@ -259,9 +259,9 @@ function App() {
                     </div>
                     {item.notes && <div style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>{item.notes}</div>}
                     {!isIdea && item.impact && (
-                      <div style={{ fontSize: 12, color: "#777", marginTop: 6, lineHeight: 1.6 }}>
-                        <span style={{ fontSize: 10, color: "#bbb", textTransform: "uppercase", letterSpacing: 1 }}>Impact </span>
-                        {item.impact}
+                      <div style={{ border: "1px solid #d9ccba", borderRadius: 6, padding: "8px 10px", marginTop: 8, background: "#fffaf4" }}>
+                        <div style={{ fontSize: 10, color: "#b79e7b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Impact</div>
+                        <div style={{ fontSize: 12, color: "#666", lineHeight: 1.6 }}>{item.impact}</div>
                       </div>
                     )}
                     {!isIdea && item.grantUse && (

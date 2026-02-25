@@ -304,7 +304,7 @@ function App() {
                     {item.gaps && (
                       <div
                         style={{
-                          border: "2px solid #b42318",
+                          border: "none",
                           borderRadius: 0,
                           padding: "8px 18px",
                           background: "#fff5f5",

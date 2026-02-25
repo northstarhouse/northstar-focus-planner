@@ -203,7 +203,7 @@ function App() {
   const items = tab === "ideas" ? ideas : wins;
 
   return (
-    <div style={{ fontFamily: "'Georgia', serif", background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
+    <div style={{ fontFamily: "'Cardo', serif", background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
       <div style={{ background: GOLD, padding: "16px 28px" }}>
         <div style={{ color: "#fff", fontSize: 10, letterSpacing: 3, textTransform: "uppercase", opacity: 0.8 }}>North Star House</div>
         <div style={{ color: "#fff", fontSize: 19, letterSpacing: 0.5 }}>Organizational Focus Planner</div>
@@ -225,7 +225,7 @@ function App() {
               fontSize: 13,
               color: tab === t.id ? GOLD : "#999",
               cursor: "pointer",
-              fontFamily: "Georgia, serif",
+              fontFamily: "'Cardo', serif",
             }}
           >
             {t.label}
@@ -263,7 +263,7 @@ function App() {
               letterSpacing: 0.5,
               flexShrink: 0,
               marginLeft: 20,
-              fontFamily: "Georgia, serif",
+              fontFamily: "'Cardo', serif",
             }}
           >
             + Add
@@ -319,7 +319,7 @@ function App() {
                           padding: "4px 10px",
                           fontSize: 11,
                           cursor: "pointer",
-                          fontFamily: "Georgia, serif",
+                          fontFamily: "'Cardo', serif",
                         }}
                       >
                         {open ? "Less" : "More"}
@@ -417,7 +417,7 @@ function App() {
                   padding: "8px 18px",
                   fontSize: 13,
                   cursor: "pointer",
-                  fontFamily: "Georgia, serif",
+                  fontFamily: "'Cardo', serif",
                 }}
               >
                 Cancel
@@ -432,7 +432,7 @@ function App() {
                   padding: "8px 22px",
                   fontSize: 13,
                   cursor: "pointer",
-                  fontFamily: "Georgia, serif",
+                  fontFamily: "'Cardo', serif",
                 }}
               >
                 Save
@@ -451,7 +451,7 @@ function Tag({ color, bg, children }) {
 
 function Btn({ color = GOLD, onClick, children }) {
   return (
-    <button onClick={onClick} style={{ background: "none", border: `1px solid ${color}50`, color, borderRadius: 3, padding: "4px 10px", fontSize: 11, cursor: "pointer", fontFamily: "Georgia, serif" }}>
+    <button onClick={onClick} style={{ background: "none", border: `1px solid ${color}50`, color, borderRadius: 3, padding: "4px 10px", fontSize: 11, cursor: "pointer", fontFamily: "'Cardo', serif" }}>
       {children}
     </button>
   );
@@ -472,7 +472,7 @@ const inp = {
   borderRadius: 4,
   padding: "8px 10px",
   fontSize: 13,
-  fontFamily: "Georgia, serif",
+  fontFamily: "'Cardo', serif",
   color: "#2d2a26",
   boxSizing: "border-box",
   background: "#fdfbf8",

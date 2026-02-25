@@ -6,6 +6,9 @@ Simple planner web app for ideas/initiatives and accomplishments.
 
 This repo includes Apps Script backend code for your spreadsheet:
 `1H222Vt9HnLQAICXBhKPXuOIoCW5azZMqF4JRdVLvz60`
+It reads/writes these tabs:
+- `Iniatives` (ideas)
+- `Accomplishments` (wins)
 
 1. Open `Extensions -> Apps Script` from that spreadsheet.
 2. Paste the code from `apps-script/planner-webapp.gs` into `Code.gs`.

@@ -311,6 +311,7 @@ function App() {
                           width: "calc(100% + 36px)",
                           marginLeft: -18,
                           marginRight: -18,
+                          marginBottom: -14,
                           boxSizing: "border-box",
                         }}
                       >

@@ -172,10 +172,10 @@ function App() {
   const items = tab === "ideas" ? ideas : wins;
 
   return (
-    <div style={{ fontFamily: "'Cardo', serif", fontSize: 18, fontWeight: 700, background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
+    <div style={{ fontFamily: "'Manrope', Tahoma, sans-serif", fontSize: 18, fontWeight: 500, background: "#fdfbf8", minHeight: "100vh", color: "#2d2a26" }}>
       <div style={{ background: GOLD, padding: "16px 28px" }}>
-        <div style={{ color: "#fff", fontSize: 10, letterSpacing: 3, textTransform: "uppercase", opacity: 0.8 }}>North Star House</div>
-        <div style={{ color: "#fff", fontSize: 19, letterSpacing: 0.5 }}>Organizational Focus Planner</div>
+        <div style={{ color: "#fff", fontSize: 10, letterSpacing: 3, textTransform: "uppercase", opacity: 0.8, fontFamily: "'Cardo', Georgia, serif" }}>North Star House</div>
+        <div style={{ color: "#fff", fontSize: 19, letterSpacing: 0.5, fontFamily: "'Cardo', Georgia, serif" }}>Organizational Focus Planner</div>
       </div>
 
       <div style={{ background: "#fff", borderBottom: "1px solid #e8e0d4", display: "flex" }}>
@@ -194,7 +194,7 @@ function App() {
               fontSize: 13,
               color: tab === t.id ? GOLD : "#999",
               cursor: "pointer",
-              fontFamily: "'Cardo', serif",
+              fontFamily: "inherit",
             }}
           >
             {t.label}
@@ -228,7 +228,7 @@ function App() {
               letterSpacing: 0.5,
               flexShrink: 0,
               marginLeft: 20,
-              fontFamily: "'Cardo', serif",
+              fontFamily: "inherit",
             }}
           >
             + Add
@@ -283,7 +283,7 @@ function App() {
                           padding: "4px 10px",
                           fontSize: 11,
                           cursor: "pointer",
-                          fontFamily: "'Cardo', serif",
+                          fontFamily: "inherit",
                         }}
                       >
                         {open ? "Less" : "More"}
@@ -374,7 +374,7 @@ function App() {
                   padding: "8px 18px",
                   fontSize: 13,
                   cursor: "pointer",
-                  fontFamily: "'Cardo', serif",
+                  fontFamily: "inherit",
                 }}
               >
                 Cancel
@@ -389,7 +389,7 @@ function App() {
                   padding: "8px 22px",
                   fontSize: 13,
                   cursor: "pointer",
-                  fontFamily: "'Cardo', serif",
+                  fontFamily: "inherit",
                 }}
               >
                 Save
@@ -408,7 +408,7 @@ function Tag({ color, bg, children }) {
 
 function Btn({ color = GOLD, onClick, children }) {
   return (
-    <button onClick={onClick} style={{ background: "none", border: `1px solid ${color}50`, color, borderRadius: 3, padding: "4px 10px", fontSize: 11, cursor: "pointer", fontFamily: "'Cardo', serif" }}>
+    <button onClick={onClick} style={{ background: "none", border: `1px solid ${color}50`, color, borderRadius: 3, padding: "4px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
       {children}
     </button>
   );
@@ -429,7 +429,7 @@ const inp = {
   borderRadius: 4,
   padding: "8px 10px",
   fontSize: 13,
-  fontFamily: "'Cardo', serif",
+  fontFamily: "inherit",
   color: "#2d2a26",
   boxSizing: "border-box",
   background: "#fdfbf8",

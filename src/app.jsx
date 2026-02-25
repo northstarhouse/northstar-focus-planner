@@ -248,9 +248,12 @@ function App() {
               <div key={item.id} style={{ background: "#fff", border: "1px solid #e8e0d4", borderLeft: `4px solid ${GOLD_MID}`, borderRadius: 6, overflow: "hidden" }}>
                 <div style={{ padding: "14px 18px", display: "flex", alignItems: "flex-start", gap: 12 }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 14, color: "#2d2a26", marginBottom: 6 }}>{item.title}</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 6 }}>
+                      <div style={{ fontSize: 14, color: "#2d2a26" }}>{item.title}</div>
+                      {isIdea && item.status && <Tag color={sc.color} bg={sc.bg}>{item.status}</Tag>}
+                    </div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: item.notes ? 8 : 0 }}>
-                      {item.status && <Tag color={sc.color} bg={sc.bg}>{item.status}</Tag>}
+                      {!isIdea && item.status && <Tag color={sc.color} bg={sc.bg}>{item.status}</Tag>}
                       {item.when && <Tag color="#888" bg="#f5f5f5">{item.when}</Tag>}
                     </div>
                     {item.notes && <div style={{ fontSize: 12, color: "#777", lineHeight: 1.6 }}>{item.notes}</div>}
